@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div id="index-form">
+        <form action="">
+            <h2>Tasks</h2>
+            <ul class="list-group">
+                <li v-for="task in tasks" v-on:click="toggleActive(task)" v-bind:class="{'active': task.completed, 'list-group-item':true}">
+                    {{task.name}}
+                </li>
+            </ul>
+            <div class="total">
+                Total: <span>{{statistics.totalTasksCount}}</span>
+                Completed: <span>{{statistics.completedTasksCount}}</span>
+                Actual: <span>{{statistics.actualTasksCount}}</span>
+                {{count()}}
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app_form = new Vue({
+            el: "#index-form",
+            data: {
+                tasks: [
+                    {name: "To wake up", completed: true},
+                    {name: "Morning routine", completed: false},
+                    {name: "Develope an index", completed: false}
+                ],
+                statistics: {
+                    totalTasksCount: 0,
+                    completedTasksCount: 0,
+                    actualTasksCount: 0
+                }
+            },
+            methods: {
+                toggleActive: function(s) {
+                    s.completed = !s.completed;
+                },
+                count: function() {
+                    this.statistics.totalTasksCount = this.tasks.length;
+                    var completedTasks = this.tasks.filter((task) => task.completed == true);
+                    this.statistics.completedTasksCount = completedTasks.length;
+                    this.statistics.actualTasksCount = this.statistics.totalTasksCount - this.statistics.completedTasksCount;
+                },
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+   <title>Vue - People</title>
+</head>
+<body>
+
+   <div id="index">
+      <h2>{{ title }}</h2>
+      <table>
+         <tr v-for="user in users">
+            <td>{{user.name}}</td>
+            <td><input type="number" v-model="user.age"></td>
+         </tr>
+         <tr>
+            <td>Середній вік</td>
+            <td>{{averageAge}}</td>
+         </tr>
+      </table>
+      {{setAverageAge()}}
+   </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+   var index = new Vue({
+      el: "#index",
+      data: {
+         title: "People",
+         users: [
+            {"name": "Jane", age: 31},
+            {"name": "John", age: 15},
+            {"name": "Peter", age: 8},
+            {"name": "Alex", age: 45},
+         ],
+         averageAge: 0,
+      },
+      methods: {
+         setAverageAge: function() {
+            var s = 0;
+            this.users.forEach((user) => {
+               s += Number(user.age);
+            });
+            this.averageAge = s / this.users.length;
+         }
+      }
+   });
+</script>
+</body>
+</html>

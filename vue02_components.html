@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="index-6">
+    <hello-block></hello-block>
+</div>
+
+<div id="index-7">
+    <hello-user v-bind:user="userObj"></hello-user>
+</div>
+
+<script>
+    //Створення компоненти
+    Vue.component('hello-block', {
+        template: "<div>Hello, World</div>"
+    })
+
+    Vue.component('hello-user', {
+        props: ['user'],
+        template: "<div>Hello, {{ user.name }}"
+    })
+
+
+
+    //Використання компоненти в екземплярі Vue
+    var app6 = new Vue({
+        el: "#index-6"
+    });
+
+    var app7 = new Vue({
+        el: "#index-7",
+        data: {
+            userObj: {id: 1, name: "John"}
+        }
+    });
+
+</script>
+
+
+</body>
+</html>
